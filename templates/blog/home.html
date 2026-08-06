@@ -1,16 +1,28 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}Home{% endblock %}
 
-{% block content %}
-    <h1>Welcome to the Blog Home Page</h1>
+{% block content %}  <!-- Changed from 'main' to 'content' -->
+    <h1>Welcome to my blog!</h1>
+
+    <h2>Categories</h2>
+    <ul>
+        {% for category in categories %}
+            <li>{{ category.name }} ({{ category.post_set.count }})</li>
+        {% endfor %}
+    </ul>
+
     <h2>Latest Posts</h2>
     {% for post in posts %}
         <div>
-            <a href="{% url 'blog:post_detail' post.slug %}"><h3>{{ post.title }}</h3></a>
+           <a href="{% url 'blog:post_detail' slug=post.slug %}">
+                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" width="200">
+            <h3>{{ post.title }}</h3>
+         </a>
             <p>{{ post.content }}</p>
             <p>Category: {{ post.category }}</p>
             <p>At {{ post.created_at }} by {{ post.author }}</p>
+        
         </div>
     {% endfor %}
 {% endblock %}
