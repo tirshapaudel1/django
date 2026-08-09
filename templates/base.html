@@ -13,7 +13,8 @@
             <ul>
                 <li><a href="{% url 'blog:home' %}">Home</a></li>
                 <li><a href="{% url 'blog:about' %}">About</a></li>
-                <li><a href="#">Search</a></li>
+                <li><a href="{% url 'blog:post_create' %}">Create New Post</a></li>
+                <li><a href="{% url 'blog:post_list' %}">Search</a></li>
             </ul>
         </nav>
     </header>

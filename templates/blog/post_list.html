@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}
+Post List
+{% endblock %}
+
+{% block content %}
+    <h1>Search blog</h1>
+    <form method="GET">
+        <input type="text" name="q" placeholder="Search..." value="{{query}}">
+        <button type="submit">Search</button>
+    </form>
+
+    {% for post in posts %}
+        <div>
+            <a href="{% url 'blog:post_detail' post.slug %}">
+                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" width="400"/>
+                <h3>{{ post.title }}</h3>
+            </a>
+
+            
+            <p>{{ post.content }}</p>
+            <p>Category: {{ post.category }}</p>
+            <p>At {{post.created_at}} by {{post.author}}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
